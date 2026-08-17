@@ -1,0 +1,29 @@
+default_language_version:
+  python: python3.13
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: format-check
+        name: format check
+        entry: pnpm format:check
+        language: system
+        pass_filenames: false
+      - id: lint
+        name: lint
+        entry: pnpm lint
+        language: system
+        pass_filenames: false
+      - id: quality-gate
+        name: complete quality gate
+        entry: pnpm check
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
