@@ -29,5 +29,7 @@ class RetryPolicy:
             return
         context.ensure_active()
 
-    def should_retry(self, error: ModelGatewayError, attempt: int, context: ExecutionContext) -> bool:
+    def should_retry(
+        self, error: ModelGatewayError, attempt: int, context: ExecutionContext
+    ) -> bool:
         return error.retryable and attempt < self.max_retries and context.remaining_seconds() > 0

@@ -4,7 +4,12 @@ from collections.abc import AsyncIterator
 from typing import Protocol
 
 from ritron_api.core.context import ExecutionContext
-from ritron_api.model_gateway.contracts import ModelDescriptor, ModelRequest, ModelResponse, ModelStreamEvent
+from ritron_api.model_gateway.contracts import (
+    ModelDescriptor,
+    ModelRequest,
+    ModelResponse,
+    ModelStreamEvent,
+)
 
 
 class ModelProvider(Protocol):

@@ -27,12 +27,16 @@ class ModelExecutionRuntime:
     async def generate(self, request: ModelRequest) -> ModelResponse:
         context = self._context_for(request)
         started = monotonic()
-        self._telemetry.emit(ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.STARTED))
+        self._telemetry.emit(
+            ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.STARTED)
+        )
         try:
             response = await self._gateway.generate(request, context)
         except ModelCancelledError:
             self._telemetry.emit(
-                ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.CANCELLED)
+                ModelExecutionEvent(
+                    context.operation_id, request.request_id, ExecutionStatus.CANCELLED
+                )
             )
             raise
         except ModelGatewayError as error:
@@ -60,7 +64,9 @@ class ModelExecutionRuntime:
 
     async def stream(self, request: ModelRequest) -> AsyncIterator[ModelStreamEvent]:
         context = self._context_for(request)
-        self._telemetry.emit(ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.STARTED))
+        self._telemetry.emit(
+            ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.STARTED)
+        )
         try:
             async for event in self._gateway.stream(request, context):
                 yield event
@@ -84,7 +90,9 @@ class ModelExecutionRuntime:
                     )
         except ModelCancelledError:
             self._telemetry.emit(
-                ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.CANCELLED)
+                ModelExecutionEvent(
+                    context.operation_id, request.request_id, ExecutionStatus.CANCELLED
+                )
             )
             raise
         finally:

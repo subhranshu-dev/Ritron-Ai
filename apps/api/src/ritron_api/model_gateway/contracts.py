@@ -105,7 +105,11 @@ class ModelRequest(BaseModel):
             capabilities.add(ModelCapability.TOOL_CALLING)
         if self.response_format is not None:
             capabilities.add(ModelCapability.STRUCTURED_OUTPUT)
-        if any(not isinstance(part, TextContent) for message in self.messages for part in message.content):
+        if any(
+            not isinstance(part, TextContent)
+            for message in self.messages
+            for part in message.content
+        ):
             capabilities.add(ModelCapability.VISION)
         return frozenset(capabilities)
 
