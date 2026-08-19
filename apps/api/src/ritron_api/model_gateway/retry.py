@@ -15,7 +15,9 @@ class RetryPolicy:
     max_backoff_seconds: float = 4.0
 
     def delay_for(self, retry_number: int, random_value: float | None = None) -> float:
-        capped = min(self.max_backoff_seconds, self.initial_backoff_seconds * 2**retry_number)
+        capped = min(
+            self.max_backoff_seconds, self.initial_backoff_seconds * 2**retry_number
+        )
         return capped * (random.random() if random_value is None else random_value)
 
     async def wait(self, retry_number: int, context: ExecutionContext) -> None:
@@ -32,4 +34,8 @@ class RetryPolicy:
     def should_retry(
         self, error: ModelGatewayError, attempt: int, context: ExecutionContext
     ) -> bool:
-        return error.retryable and attempt < self.max_retries and context.remaining_seconds() > 0
+        return (
+            error.retryable
+            and attempt < self.max_retries
+            and context.remaining_seconds() > 0
+        )

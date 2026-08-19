@@ -15,7 +15,9 @@ from ritron_api.model_gateway.contracts import (
 class ModelProvider(Protocol):
     id: str
 
-    async def generate(self, request: ModelRequest, context: ExecutionContext) -> ModelResponse: ...
+    async def generate(
+        self, request: ModelRequest, context: ExecutionContext
+    ) -> ModelResponse: ...
 
     async def stream(
         self, request: ModelRequest, context: ExecutionContext
