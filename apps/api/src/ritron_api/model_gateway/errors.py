@@ -20,9 +20,7 @@ class ModelGatewayError(Exception):
     retryable = False
     status_code = 502
 
-    def __init__(
-        self, message: str, *, safe_details: dict[str, object] | None = None
-    ) -> None:
+    def __init__(self, message: str, *, safe_details: dict[str, object] | None = None) -> None:
         super().__init__(message)
         self.safe_details = safe_details or {}
 

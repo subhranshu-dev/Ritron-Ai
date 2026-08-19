@@ -43,9 +43,7 @@ class Settings(BaseSettings):
     @classmethod
     def parse_cors_origins(cls, value: str | Sequence[str]) -> tuple[str, ...]:
         if isinstance(value, str):
-            origins = tuple(
-                origin.strip() for origin in value.split(",") if origin.strip()
-            )
+            origins = tuple(origin.strip() for origin in value.split(",") if origin.strip())
         else:
             origins = tuple(value)
         if not origins:

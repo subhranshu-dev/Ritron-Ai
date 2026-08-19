@@ -16,9 +16,7 @@ from ritron_api.model_gateway.errors import ModelCancelledError, ModelGatewayErr
 
 
 class ModelGateway(Protocol):
-    async def generate(
-        self, request: ModelRequest, context: ExecutionContext
-    ) -> ModelResponse: ...
+    async def generate(self, request: ModelRequest, context: ExecutionContext) -> ModelResponse: ...
 
     async def stream(
         self, request: ModelRequest, context: ExecutionContext
@@ -26,9 +24,7 @@ class ModelGateway(Protocol):
 
 
 class ModelExecutionRuntime:
-    def __init__(
-        self, gateway: ModelGateway, telemetry: ModelTelemetryHook | None = None
-    ) -> None:
+    def __init__(self, gateway: ModelGateway, telemetry: ModelTelemetryHook | None = None) -> None:
         self._gateway = gateway
         self._telemetry = telemetry or NullTelemetry()
 
@@ -36,9 +32,7 @@ class ModelExecutionRuntime:
         context = self._context_for(request)
         started = monotonic()
         self._telemetry.emit(
-            ModelExecutionEvent(
-                context.operation_id, request.request_id, ExecutionStatus.STARTED
-            )
+            ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.STARTED)
         )
         try:
             response = await self._gateway.generate(request, context)
@@ -75,9 +69,7 @@ class ModelExecutionRuntime:
     async def stream(self, request: ModelRequest) -> AsyncIterator[ModelStreamEvent]:
         context = self._context_for(request)
         self._telemetry.emit(
-            ModelExecutionEvent(
-                context.operation_id, request.request_id, ExecutionStatus.STARTED
-            )
+            ModelExecutionEvent(context.operation_id, request.request_id, ExecutionStatus.STARTED)
         )
         try:
             async for event in self._gateway.stream(request, context):

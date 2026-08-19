@@ -9,9 +9,7 @@ from ritron_api.readiness import ReadinessResult
 @pytest.mark.anyio
 async def test_liveness_reports_an_alive_process() -> None:
     async with api_client(create_app()) as client:
-        response = await client.get(
-            "/health/live", headers={"X-Request-ID": "test-request-1"}
-        )
+        response = await client.get("/health/live", headers={"X-Request-ID": "test-request-1"})
 
     assert response.status_code == 200
     assert response.json()["status"] == "alive"
@@ -32,9 +30,7 @@ async def test_readiness_reports_started_application() -> None:
 @pytest.mark.integration
 @pytest.mark.anyio
 async def test_readiness_fails_when_a_registered_check_is_unready() -> None:
-    app = create_app(
-        readiness_checks=[lambda: ReadinessResult(name="future-service", ready=False)]
-    )
+    app = create_app(readiness_checks=[lambda: ReadinessResult(name="future-service", ready=False)])
 
     async with api_client(app) as client:
         response = await client.get("/health/ready")

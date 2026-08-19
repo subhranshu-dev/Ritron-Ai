@@ -41,15 +41,11 @@ def create_app(
 ) -> FastAPI:
     """Build the API without initializing future product subsystems."""
     resolved_settings = settings or Settings()
-    readiness_registry = ReadinessRegistry(
-        (application_bootstrap_check, *readiness_checks)
-    )
+    readiness_registry = ReadinessRegistry((application_bootstrap_check, *readiness_checks))
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-        configure_logging(
-            str(resolved_settings.environment), resolved_settings.log_level
-        )
+        configure_logging(str(resolved_settings.environment), resolved_settings.log_level)
         app.state.lifecycle_state = "started"
         logger.info(
             "application started",
@@ -89,13 +85,9 @@ def create_app(
 
 def _register_middleware(app: FastAPI) -> None:
     @app.middleware("http")
-    async def request_context(
-        request: Request, call_next: RequestResponseEndpoint
-    ) -> Response:
+    async def request_context(request: Request, call_next: RequestResponseEndpoint) -> Response:
         candidate = request.headers.get("X-Request-ID", "")
-        request_id = (
-            candidate if REQUEST_ID_PATTERN.fullmatch(candidate) else str(uuid.uuid4())
-        )
+        request_id = candidate if REQUEST_ID_PATTERN.fullmatch(candidate) else str(uuid.uuid4())
         token = request_id_context.set(request_id)
         try:
             response = await call_next(request)
@@ -107,21 +99,15 @@ def _register_middleware(app: FastAPI) -> None:
 
 def _register_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(StarletteHTTPException)
-    async def http_exception_handler(
-        _: Request, exc: StarletteHTTPException
-    ) -> JSONResponse:
+    async def http_exception_handler(_: Request, exc: StarletteHTTPException) -> JSONResponse:
         code = "not_found" if exc.status_code == 404 else "http_error"
         message = (
-            "The requested resource was not found"
-            if exc.status_code == 404
-            else "Request failed"
+            "The requested resource was not found" if exc.status_code == 404 else "Request failed"
         )
         return _error_response(exc.status_code, code, message)
 
     @app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(
-        _: Request, exc: RequestValidationError
-    ) -> JSONResponse:
+    async def validation_exception_handler(_: Request, exc: RequestValidationError) -> JSONResponse:
         return _error_response(
             422,
             "validation_error",
@@ -130,12 +116,8 @@ def _register_exception_handlers(app: FastAPI) -> None:
         )
 
     @app.exception_handler(Exception)
-    async def unexpected_exception_handler(
-        request: Request, error: Exception
-    ) -> JSONResponse:
-        logger.exception(
-            "unhandled request exception", extra={"event": "request.failed"}
-        )
+    async def unexpected_exception_handler(request: Request, error: Exception) -> JSONResponse:
+        logger.exception("unhandled request exception", extra={"event": "request.failed"})
         return _error_response(500, "internal_error", "An internal error occurred")
 
 
@@ -150,9 +132,7 @@ def _error_response(
         request_id=request_id_context.get() or "unknown",
         timestamp=datetime.now(UTC),
     )
-    return JSONResponse(
-        status_code=status_code, content=payload.model_dump(mode="json")
-    )
+    return JSONResponse(status_code=status_code, content=payload.model_dump(mode="json"))
 
 
 def _register_routes(app: FastAPI) -> None:
@@ -168,10 +148,7 @@ def _register_routes(app: FastAPI) -> None:
         checks = registry.evaluate()
         response = ReadinessResponse(
             status="ready" if all(check.ready for check in checks) else "not_ready",
-            checks=[
-                ReadinessCheckResponse(name=check.name, ready=check.ready)
-                for check in checks
-            ],
+            checks=[ReadinessCheckResponse(name=check.name, ready=check.ready) for check in checks],
             timestamp=datetime.now(UTC),
         )
         if response.status == "ready":

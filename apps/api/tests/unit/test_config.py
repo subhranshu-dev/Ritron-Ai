@@ -16,9 +16,7 @@ def test_settings_load_namespaced_environment_overrides(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("RITRON_API_PORT", "9001")
-    monkeypatch.setenv(
-        "RITRON_API_CORS_ORIGINS", "http://localhost:1420,http://localhost:3000"
-    )
+    monkeypatch.setenv("RITRON_API_CORS_ORIGINS", "http://localhost:1420,http://localhost:3000")
 
     settings = Settings()
 
