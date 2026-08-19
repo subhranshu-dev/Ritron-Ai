@@ -17,12 +17,12 @@ is started to build, test, or run the local API. See
 
 ## Reserved subdirectories
 
-| Directory     | Will hold                                             | Arrives at |
-| -------------- | ------------------------------------------------------ | ---------- |
-| `docker/`      | Container definitions for development/server infra.    | When a real server-infrastructure need exists — not a desktop requirement. |
-| `ci/`          | CI configuration beyond the default GitHub Actions setup. | When CI needs outgrow inline workflow files. |
-| `deployment/`  | Deployment manifests and environment configuration.    | With the Tauri shell / server milestone. |
-| `monitoring/`  | Observability and monitoring configuration.             | Once a running service exists to observe. |
+| Directory     | Will hold                                                 | Arrives at                                                                 |
+| ------------- | --------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `docker/`     | Container definitions for development/server infra.       | When a real server-infrastructure need exists — not a desktop requirement. |
+| `ci/`         | CI configuration beyond the default GitHub Actions setup. | When CI needs outgrow inline workflow files.                               |
+| `deployment/` | Deployment manifests and environment configuration.       | With the Tauri shell / server milestone.                                   |
+| `monitoring/` | Observability and monitoring configuration.               | Once a running service exists to observe.                                  |
 
 ## Steps to populate a subdirectory (when its milestone arrives)
 

@@ -33,7 +33,7 @@ milestone, would create a false architecture that Step 01 explicitly avoids
 2. Scaffold the Tauri 2 project inside this directory, pinning Rust,
    Node, and pnpm versions consistent with the rest of the repo.
 3. Wire the desktop `pnpm` scripts into the root quality gate (`pnpm
-   check`, `pnpm lint`, `pnpm test`) rather than introducing a parallel
+check`, `pnpm lint`, `pnpm test`) rather than introducing a parallel
    toolchain.
 4. Replace this README with real setup and architecture documentation for
    the shipped shell.

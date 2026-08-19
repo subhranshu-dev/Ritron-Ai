@@ -10,16 +10,16 @@ ownership meaningful.
 
 ## Current layout
 
-| Location          | Responsibility                                                    |
-| ------------------ | -------------------------------------------------------------------- |
-| `apps/api`          | Python FastAPI core bootstrap and future local service boundary.     |
-| `apps/desktop`       | Reserved Tauri/React desktop shell workspace.                        |
-| `crates/ritron-foundation` | Rust foundation shared by future native components.           |
-| `infrastructure`     | Development container, CI, deployment, and monitoring conventions.   |
-| `scripts`            | Cross-platform root command orchestration.                           |
-| `tests`              | Cross-cutting test-boundary documentation and future suites.         |
-| `docs`               | Guides and architecture documentation (this directory).              |
-| `docs/decisions`     | Architecture decision records.                                       |
+| Location                   | Responsibility                                                     |
+| -------------------------- | ------------------------------------------------------------------ |
+| `apps/api`                 | Python FastAPI core bootstrap and future local service boundary.   |
+| `apps/desktop`             | Reserved Tauri/React desktop shell workspace.                      |
+| `crates/ritron-foundation` | Rust foundation shared by future native components.                |
+| `infrastructure`           | Development container, CI, deployment, and monitoring conventions. |
+| `scripts`                  | Cross-platform root command orchestration.                         |
+| `tests`                    | Cross-cutting test-boundary documentation and future suites.       |
+| `docs`                     | Guides and architecture documentation (this directory).            |
+| `docs/decisions`           | Architecture decision records.                                     |
 
 ## Steps to add a new top-level location
 

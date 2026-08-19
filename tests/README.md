@@ -17,13 +17,13 @@ overall testing strategy.
 
 ## Reserved boundaries
 
-| Directory        | Covers                                                        |
-| ------------------ | ---------------------------------------------------------------- |
-| `unit/`             | Pure cross-component behavior.                                   |
-| `integration/`      | Interactions between installed services.                         |
-| `e2e/`              | User-visible flows across process boundaries.                    |
-| `agent-evals/`      | Agent correctness, tool selection, hallucination, planning, recovery, safety, latency, and cost — arrives with the agent runtime milestone. |
-| `security/`         | Adversarial and security-regression coverage.                    |
+| Directory      | Covers                                                                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `unit/`        | Pure cross-component behavior.                                                                                                              |
+| `integration/` | Interactions between installed services.                                                                                                    |
+| `e2e/`         | User-visible flows across process boundaries.                                                                                               |
+| `agent-evals/` | Agent correctness, tool selection, hallucination, planning, recovery, safety, latency, and cost — arrives with the agent runtime milestone. |
+| `security/`    | Adversarial and security-regression coverage.                                                                                               |
 
 ## Steps to add a suite to one of these boundaries
 

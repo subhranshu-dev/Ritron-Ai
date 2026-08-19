@@ -68,19 +68,19 @@ pnpm check   # run the complete local quality gate before committing
 ## Common commands
 
 | Command                 | Purpose                                                |
-| ------------------------ | ------------------------------------------------------ |
-| `pnpm dev`               | Start the local API on `127.0.0.1:8000`.                |
-| `pnpm build`             | Validate TypeScript and build the Python distribution.  |
-| `pnpm test`              | Run all API tests.                                      |
-| `pnpm test:unit`         | Run unit tests.                                         |
-| `pnpm test:integration`  | Run integration tests.                                  |
-| `pnpm test:e2e`          | Run public API contract tests.                          |
-| `pnpm lint`              | Run JavaScript, Python, and Rust linters.                |
-| `pnpm format`            | Format supported source files.                          |
-| `pnpm format:check`      | Verify formatting without changing files.                |
-| `pnpm typecheck`         | Run TypeScript and Python type checks.                  |
-| `pnpm check`             | Run the complete local quality gate.                     |
-| `pnpm clean`             | Remove local build and test artifacts.                   |
+| ----------------------- | ------------------------------------------------------ |
+| `pnpm dev`              | Start the local API on `127.0.0.1:8000`.               |
+| `pnpm build`            | Validate TypeScript and build the Python distribution. |
+| `pnpm test`             | Run all API tests.                                     |
+| `pnpm test:unit`        | Run unit tests.                                        |
+| `pnpm test:integration` | Run integration tests.                                 |
+| `pnpm test:e2e`         | Run public API contract tests.                         |
+| `pnpm lint`             | Run JavaScript, Python, and Rust linters.              |
+| `pnpm format`           | Format supported source files.                         |
+| `pnpm format:check`     | Verify formatting without changing files.              |
+| `pnpm typecheck`        | Run TypeScript and Python type checks.                 |
+| `pnpm check`            | Run the complete local quality gate.                   |
+| `pnpm clean`            | Remove local build and test artifacts.                 |
 
 ## Architecture boundaries
 
