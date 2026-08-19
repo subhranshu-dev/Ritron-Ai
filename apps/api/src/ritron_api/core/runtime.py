@@ -18,7 +18,7 @@ from ritron_api.model_gateway.errors import ModelCancelledError, ModelGatewayErr
 class ModelGateway(Protocol):
     async def generate(self, request: ModelRequest, context: ExecutionContext) -> ModelResponse: ...
 
-    async def stream(
+    def stream(
         self, request: ModelRequest, context: ExecutionContext
     ) -> AsyncIterator[ModelStreamEvent]: ...
 
